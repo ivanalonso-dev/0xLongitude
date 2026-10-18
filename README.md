@@ -38,6 +38,7 @@ Swing traders de BTC/ETH, mesas pequeñas y fondos cripto que operan a 1–3 dí
 │   └── processed/
 ├── queries/     SQL de Dune
 ├── src/         scripts Python
+├── tests/       pruebas con datos sintéticos (python tests/test_sinteticos.py)
 └── results/     salidas del backtest
 ```
 
