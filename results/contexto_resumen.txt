@@ -1,0 +1,11 @@
+0xLongitude - datos de contexto (SOLO entrenamiento 2022-2024)
+
+Días: 1096
+funding_anualizado_pct   n=1096  faltan=   0  media=7.989  p5=-2.924  p95=21.14
+oi_usd                   n=1096  faltan=   0  media=3.609e+09  p5=1.967e+09  p95=6.711e+09
+oi_cambio_pct            n=1095  faltan=   1  media=0.224  p5=-8.11  p95=8.974
+ls_ratio_top             n= 782  faltan= 314  media=1.299  p5=1.065  p95=1.683
+ls_ratio_cuentas         n=1078  faltan=  18  media=1.521  p5=0.7553  p95=2.577
+taker_buy_sell           n= 969  faltan= 127  media=1.112  p5=1.034  p95=1.225
+usdt_emision_usd         n=1095  faltan=   1  media=5.353e+07  p5=-2.457e+08  p95=4.69e+08
+usdc_emision_usd         n=1095  faltan=   1  media=5.268e+06  p5=-3.738e+08  p95=3.338e+08

@@ -1,0 +1,27 @@
+0xLongitude - eventos etiquetados (SOLO diseño + validación, 2022-2024)
+
+Días con sigma: 1065 | eventos: 519 (48.7% de los días)
+Subidas: 274 | bajadas: 245
+
+Resultado (tasa base):
+resultado
+neutro          0.455
+continuacion    0.276
+reversion       0.270
+C_fragilidad: 0.125
+
+Por dirección del movimiento:
+           A_continuacion  B_reversion  C_fragilidad
+direccion                                           
+bajada              0.286        0.269         0.131
+subida              0.266        0.270         0.120
+
+Por año:
+      A_continuacion  B_reversion  C_fragilidad    n
+anio                                                
+2022           0.233        0.277         0.113  159
+2023           0.286        0.244         0.125  168
+2024           0.302        0.286         0.135  192
+
+MFE / MAE (en sigmas*sqrt(3)) - mediana: 0.61 / 0.59
+Retorno alineado medio a 1/2/3 d (%): -0.030 / +0.185 / +0.338

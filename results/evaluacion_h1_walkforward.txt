@@ -1,0 +1,38 @@
+0xLongitude - Evaluación H1 (prerregistro v3)
+
+Eventos 2022-2024: 519
+Variables globales (10): g_r_en_sigmas, g_sigma, g_rango_en_sigmas, g_mom3_al, g_spot_imbalance_al, g_coinbase_premium_al, g_kimchi_d1_al, g_funding_al, g_oi_cambio_al, g_taker_fut_al
+Variables regionales (0): NINGUNA (faltan datos de Dune)
+
+##### DESCRIPTIVOS (antes de cualquier modelo) #####
+      eventos      A      B  neutro      C
+anio                                      
+2022      159  0.233  0.277   0.491  0.113
+2023      168  0.286  0.244   0.470  0.125
+2024      192  0.302  0.286   0.411  0.135
+Eventos con otro evento en los 3 días anteriores (ventanas de 72 h solapadas): 86.5%
+Eventos por mes: mediana 15, máximo 21 (2022-04)
+
+##### WALK-FORWARD 2023-T1 -> 2024-T4 (8 pliegues trimestrales) #####
+
+=== A · continuación | 360 eventos fuera de muestra | tasa real 0.294 ===
+  constante        log_loss 0.6111  brier 0.2097
+  global           log_loss 0.6079  brier 0.2082  auc 0.527
+  mejora global vs constante:  +0.0033  IC95 [-0.0104, +0.0172]
+  C elegidos por pliegue: global: [0.03, 0.01, 0.01, 0.01, 0.01, 0.1, 0.01, 0.01]
+
+=== B · reversión | 360 eventos fuera de muestra | tasa real 0.267 ===
+  constante        log_loss 0.5806  brier 0.1958
+  global           log_loss 0.5880  brier 0.1991  auc 0.499
+  mejora global vs constante:  -0.0074  IC95 [-0.0185, +0.0026]
+  C elegidos por pliegue: global: [0.01, 0.01, 0.03, 0.01, 0.01, 0.01, 0.01, 0.03]
+
+=== C · fragilidad | 360 eventos fuera de muestra | tasa real 0.131 ===
+  constante        log_loss 0.3885  brier 0.1137
+  global           log_loss 0.3904  brier 0.1146  auc 0.570
+  mejora global vs constante:  -0.0019  IC95 [-0.0141, +0.0096]
+  C elegidos por pliegue: global: [0.1, 0.01, 0.03, 0.01, 0.01, 0.1, 0.3, 0.03]
+
+##### SECUNDARIO: modelo multinomial de 3 estados (C fijo = 0,1; no decide el veredicto) #####
+  constante        log_loss multiclase 1.0802
+  global           log_loss multiclase 1.1129

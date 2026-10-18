@@ -1,0 +1,87 @@
+0xLongitude - ¿La kimchi premium anticipa el retorno de BTC?
+Periodo: 2022-01-01 -> 2024-12-31 (1096 días) - SOLO entrenamiento
+
+IC = correlación de Spearman con el retorno futuro. |IC| > 0,05 sostenido ya es útil en mercados.
+p_boot < 0,05 = poco probable por azar. t_hac = efecto controlando por momentum (|t| > 2 = relevante).
+Signo coherente en los 3 años = estable.
+
+--- Retorno a 1 día(s) ---
+    variable     ic  p_boot  t_hac_con_momentum  ic_2022  ic_2023  ic_2024 estable
+kimchi_nivel +0.029  +0.326              +0.282   +0.044   +0.031   +0.005      sí
+   kimchi_d1 -0.003  +0.921              -1.769   -0.042   -0.004   +0.039      no
+   kimchi_d3 +0.012  +0.683              -0.292   +0.004   +0.020   +0.013      sí
+  kimchi_z30 +0.033  +0.268              +0.290   +0.018   +0.017   +0.058      sí
+       mom_1 -0.051  +0.098                   -   -0.040   -0.086   -0.055      sí
+       mom_3 -0.008  +0.795                   -   -0.011   -0.012   -0.030      sí
+
+--- Retorno a 2 día(s) ---
+    variable     ic  p_boot  t_hac_con_momentum  ic_2022  ic_2023  ic_2024 estable
+kimchi_nivel +0.028  +0.483              +0.723   +0.064   +0.030   -0.018      no
+   kimchi_d1 -0.011  +0.735              -0.408   -0.011   -0.048   +0.022      no
+   kimchi_d3 +0.029  +0.430              +0.255   +0.089   -0.019   -0.005      no
+  kimchi_z30 +0.038  +0.352              +1.010   +0.039   +0.007   +0.053      sí
+       mom_1 +0.006  +0.832                   -   -0.005   -0.007   +0.010      no
+       mom_3 +0.012  +0.739                   -   -0.039   +0.046   +0.009      no
+
+--- Retorno a 3 día(s) ---
+    variable     ic  p_boot  t_hac_con_momentum  ic_2022  ic_2023  ic_2024 estable
+kimchi_nivel +0.031  +0.530              +0.780   +0.065   +0.034   -0.024      no
+   kimchi_d1 +0.000  +0.993              +0.246   +0.007   -0.022   +0.002      no
+   kimchi_d3 +0.026  +0.519              +0.311   +0.074   +0.018   -0.023      no
+  kimchi_z30 +0.038  +0.400              +1.064   +0.031   +0.013   +0.052      sí
+       mom_1 +0.012  +0.703                   -   -0.012   +0.062   -0.008      no
+       mom_3 +0.002  +0.962                   -   -0.068   +0.064   -0.001      no
+
+--- Retorno medio futuro (%) por quintil de la variable (Q1 = valores más bajos) ---
+kimchi_nivel:
+                 1d     2d     3d
+kimchi_nivel                     
+Q1            0.193  0.247  0.385
+Q2            0.020 -0.160 -0.138
+Q3           -0.313 -0.273 -0.517
+Q4            0.222  0.468  0.614
+Q5            0.184  0.329  0.584
+
+kimchi_d1:
+              1d     2d     3d
+kimchi_d1                     
+Q1         0.338  0.379  0.488
+Q2         0.112  0.318  0.335
+Q3         0.038 -0.073  0.047
+Q4        -0.036  0.149  0.262
+Q5        -0.142 -0.146 -0.175
+
+kimchi_d3:
+              1d     2d     3d
+kimchi_d3                     
+Q1         0.233  0.080  0.305
+Q2        -0.080  0.009 -0.036
+Q3         0.197  0.383  0.289
+Q4        -0.056  0.087  0.352
+Q5         0.031  0.112  0.120
+
+kimchi_z30:
+               1d     2d     3d
+kimchi_z30                     
+Q1          0.037 -0.102  0.007
+Q2          0.020 -0.029  0.010
+Q3          0.094  0.405  0.435
+Q4          0.233  0.485  0.556
+Q5          0.053  0.135  0.328
+
+--- Calidad del movimiento: ¿el movimiento de hoy continúa si lo acompaña Corea? ---
+Modelo: ret_futuro ~ mom_1 + kimchi_d1 + mom_1*kimchi_d1 (variables estandarizadas, errores Newey-West)
+Interacción negativa = los movimientos empujados por Corea tienden a revertirse.
+  1d: mom_1 -0.115 (t -0.96) | kimchi_d1 -0.175 (t -1.78) | interacción +0.001 (t +0.01)
+  2d: mom_1 +0.084 (t +0.54) | kimchi_d1 -0.062 (t -0.46) | interacción -0.046 (t -0.62)
+  3d: mom_1 +0.158 (t +0.79) | kimchi_d1 +0.042 (t +0.25) | interacción -0.001 (t -0.01)
+
+Retorno medio a 1-3 días (%) tras días de subida/bajada de BTC, según la kimchi suba o baje ese día:
+                         1d     2d     3d    n
+btc_hoy  corea_hoy                            
+BTC baja kimchi baja  0.181 -0.189 -0.008  199
+         kimchi sube -0.034  0.017 -0.028  354
+BTC sube kimchi baja  0.118  0.362  0.350  370
+         kimchi sube  0.003  0.202  0.529  171
+
+Pruebas realizadas: 12 combinaciones de kimchi + 3 de interacción. Con tantas pruebas, alguna sale 'significativa' por azar: exigir p_boot < 0,01 o estabilidad anual.

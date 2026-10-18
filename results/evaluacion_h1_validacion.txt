@@ -1,0 +1,36 @@
+0xLongitude - Evaluación H1 (prerregistro v2.1)
+
+Variables globales (10): g_r_en_sigmas, g_sigma, g_rango_en_sigmas, g_mom3_al, g_spot_imbalance_al, g_coinbase_premium_al, g_kimchi_d1_al, g_funding_al, g_oi_cambio_al, g_taker_fut_al
+Variables regionales (0): NINGUNA (faltan datos de Dune)
+
+##### DISEÑO -> VALIDACIÓN #####
+Ajuste: 155 eventos (2022-02-02 -> 2023-12-26) | validación: 95 eventos (2024-01-04 -> 2024-12-26)
+
+=== A · continuación | tasa base ajuste 0.258 | tasa en validación 0.316 ===
+  constante        log_loss 0.6320  brier 0.2194
+  global           log_loss 0.6350  brier 0.2207  auc 0.557  (C=0.01)
+  mejora global vs constante:  -0.0030  IC95 [-0.0268, +0.0198]
+
+=== B · reversión | tasa base ajuste 0.290 | tasa en validación 0.305 ===
+  constante        log_loss 0.6158  brier 0.2123
+  global           log_loss 0.6120  brier 0.2107  auc 0.551  (C=0.01)
+  mejora global vs constante:  +0.0038  IC95 [-0.0062, +0.0144]
+
+=== C · fragilidad | tasa base ajuste 0.161 | tasa en validación 0.147 ===
+  constante        log_loss 0.4189  brier 0.1258
+  global           log_loss 0.4150  brier 0.1249  auc 0.603  (C=0.01)
+  mejora global vs constante:  +0.0039  IC95 [-0.0031, +0.0106]
+
+Coeficientes del modelo global ajustado en diseño (variables estandarizadas, C=1):
+                       A_continuacion  B_reversion  C_fragilidad
+g_r_en_sigmas                   0.237        0.746         0.153
+g_sigma                        -0.752       -0.170        -0.324
+g_rango_en_sigmas              -0.069       -0.612        -0.303
+g_mom3_al                       0.377       -0.060         0.194
+g_spot_imbalance_al             0.022       -0.052         0.396
+g_coinbase_premium_al           0.073       -0.023        -0.235
+g_kimchi_d1_al                 -0.062        0.006        -0.214
+g_funding_al                   -0.169       -0.175         0.039
+g_oi_cambio_al                  0.247       -0.033        -0.095
+g_taker_fut_al                  0.370       -0.225        -0.091
+falta_g_taker_fut_al            0.064        0.255         0.086

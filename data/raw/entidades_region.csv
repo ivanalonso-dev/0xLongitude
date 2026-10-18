@@ -1,0 +1,31 @@
+entidad,dune_cex_name_verificar,region,subregion,pais_referencia,fiat_principal,criterio,confianza,incluir_fase0,feed_prima,notas
+Coinbase,Coinbase,US,US,Estados Unidos,USD,fiat_local,alta,si,BTC-USD (Coinbase premium),Referencia institucional de EE. UU.; custodio de la mayoría de ETF spot
+Kraken,Kraken,US,US,Estados Unidos,USD/EUR,fiat_local,media,si,,Base de usuarios repartida EE. UU./Europa; revisar si se separa
+Gemini,Gemini,US,US,Estados Unidos,USD,fiat_local,alta,si,,
+Robinhood,Robinhood,US,US,Estados Unidos,USD,fiat_local,alta,si,,Minorista EE. UU.
+Bitstamp,Bitstamp,EU,EU,Luxemburgo,EUR/USD,fiat_local,media,si,,Propiedad de Robinhood desde 2025; usuarios mayoritariamente europeos
+Bitvavo,Bitvavo,EU,EU,Países Bajos,EUR,fiat_local,alta,si,,
+Bitpanda,Bitpanda,EU,EU,Austria,EUR,fiat_local,alta,si,,
+Upbit,Upbit,ASIA,KR,Corea del Sur,KRW,fiat_local,alta,si,KRW-BTC (kimchi premium),Mayor exchange coreano
+Bithumb,Bithumb,ASIA,KR,Corea del Sur,KRW,fiat_local,alta,si,,
+Korbit,Korbit,ASIA,KR,Corea del Sur,KRW,fiat_local,alta,no,,Volumen pequeño; incluir si Dune lo tiene etiquetado
+Coinone,Coinone,ASIA,KR,Corea del Sur,KRW,fiat_local,alta,no,,Volumen pequeño; incluir si Dune lo tiene etiquetado
+bitFlyer,bitFlyer,ASIA,JP,Japón,JPY,fiat_local,alta,si,BTC_JPY (prima Japón),
+Coincheck,Coincheck,ASIA,JP,Japón,JPY,fiat_local,alta,si,,
+bitbank,bitbank,ASIA,JP,Japón,JPY,fiat_local,alta,no,,Volumen pequeño
+HashKey,HashKey,ASIA,HK,Hong Kong,HKD/USD,fiat_local,alta,no,,Regulado en HK; volumen pequeño pero señal limpia
+OSL,OSL,ASIA,HK,Hong Kong,HKD/USD,fiat_local,alta,no,,Regulado en HK
+Binance,Binance,BINANCE,GLOBAL,Sin sede clara,USDT,bloque_propio,n/a,si,BTCUSDT (referencia de precio global),Demasiado grande para ignorarlo y sin región; se trata como bloque aparte
+OKX,OKX,OFFSHORE,GLOBAL,Seychelles (operativa global),USDT,offshore,baja,si,,Base de usuarios con mucho peso asiático; NO se asigna a Asia sin evidencia
+Bybit,Bybit,OFFSHORE,GLOBAL,Emiratos (Dubái),USDT,offshore,baja,si,,Mayormente derivados
+Bitget,Bitget,OFFSHORE,GLOBAL,Seychelles (operativa global),USDT,offshore,baja,si,,
+HTX,HTX,OFFSHORE,GLOBAL,Seychelles (operativa global),USDT,offshore,baja,si,,Antigua Huobi; históricamente usuarios chinos
+KuCoin,KuCoin,OFFSHORE,GLOBAL,Seychelles (operativa global),USDT,offshore,baja,si,,
+Gate,Gate.io,OFFSHORE,GLOBAL,Operativa global,USDT,offshore,baja,no,,
+MEXC,MEXC,OFFSHORE,GLOBAL,Operativa global,USDT,offshore,baja,no,,
+Crypto.com,Crypto.com,OFFSHORE,GLOBAL,Singapur (operativa global),USD/USDT,offshore,baja,no,,Base de usuarios muy mezclada
+Bitfinex,Bitfinex,OFFSHORE,GLOBAL,Islas Vírgenes Británicas,USD/USDT,offshore,baja,si,,Pocas cuentas pero muy grandes; vinculado a Tether
+Mercado Bitcoin,Mercado Bitcoin,OTHER,LATAM,Brasil,BRL,fiat_local,alta,no,,Fuera del alcance de la Fase 0
+Bitso,Bitso,OTHER,LATAM,México,MXN,fiat_local,alta,no,,Fuera del alcance de la Fase 0
+BtcTurk,BtcTurk,OTHER,TR,Turquía,TRY,fiat_local,alta,no,,Fuera del alcance de la Fase 0
+Indodax,Indodax,OTHER,ID,Indonesia,IDR,fiat_local,alta,no,,Fuera del alcance de la Fase 0

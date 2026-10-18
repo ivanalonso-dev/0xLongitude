@@ -1,0 +1,10 @@
+fecha_inicio,fecha_fin,evento,tipo,activos,regiones_afectadas,nota
+2022-05-07,2022-05-13,Colapso de LUNA/UST,crisis_stablecoin,USDT;BTC;ETH,GLOBAL,USDT pierde la paridad brevemente
+2022-11-06,2022-11-14,Quiebra de FTX,quiebra_exchange,BTC;ETH;USDT,OFFSHORE;GLOBAL,Retiradas masivas de exchanges en todo el mercado
+2023-03-10,2023-03-14,Caída de SVB y desanclaje de USDC,crisis_stablecoin,USDC;USDT,US,USDC por debajo de 1 USD; USDT por encima
+2023-04-12,2023-04-12,Shapella (retiradas de staking habilitadas),cambio_protocolo,ETH,GLOBAL,A partir de aquí el ETH en staking puede volver a exchanges
+2024-01-11,2024-01-11,Inicio de negociación de ETF spot de BTC en EE. UU.,lanzamiento_etf,BTC,US,Cambia la naturaleza de los flujos de Coinbase (custodia de ETF)
+2024-06-19,2024-07-12,Ventas de BTC del gobierno alemán,venta_gobierno,BTC,EU;US,Envíos a exchanges y market makers; fechas aproximadas
+2024-07-05,2024-08-31,Reparto de Mt. Gox vía Kraken y Bitstamp,distribucion_liquidacion,BTC,US;EU,Entradas en exchanges que no son ventas de mercado; fin aproximado
+2024-07-23,2024-07-23,Inicio de negociación de ETF spot de ETH en EE. UU.,lanzamiento_etf,ETH,US,
+2025-02-21,2025-02-21,Hackeo de Bybit,hackeo_exchange,ETH,OFFSHORE,Salida enorme de ETH que no es acumulación (fuera de muestra)
