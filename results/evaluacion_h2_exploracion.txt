@@ -1,0 +1,16 @@
+0xLongitude - H2 divergencia contado / derivados (prerregistro 07)
+
+Eventos 2022-2024 con las tres variables: 462 (excluidos por datos ausentes: 57)
+Eventos divergentes por año: 2022: 7/102, 2023: 30/168, 2024: 23/192
+
+##### PRINCIPAL: tasa en eventos divergentes vs. resto (2022-2024) #####
+B · reversión: divergentes 0.283 vs resto 0.256 | diferencia +0.027  IC95 [-0.099, +0.148]
+  walk-forward 2023-2024 (360 eventos): mejora log loss global+divergencia vs global -0.0009  IC95 [-0.0032, +0.0013]
+C · fragilidad: divergentes 0.100 vs resto 0.129 | diferencia -0.029  IC95 [-0.108, +0.059]
+  walk-forward 2023-2024 (360 eventos): mejora log loss global+divergencia vs global -0.0058  IC95 [-0.0129, -0.0003]
+
+##### SENSIBILIDAD (no cambia el veredicto) #####
+imbalance*d <= -0,01 (n div = 43): B · reversión +0.021 [-0.124, +0.166] | C · fragilidad -0.036 [-0.118, +0.058]
+OI > +1 % (n div = 52): B · reversión +0.032 [-0.094, +0.168] | C · fragilidad -0.055 [-0.127, +0.037]
+solo subidas (n div = 60): B · reversión +0.039 [-0.085, +0.162] | C · fragilidad -0.017 [-0.099, +0.074]
+solo bajadas (n div = 0): B · reversión +nan [+nan, +nan] | C · fragilidad +nan [+nan, +nan]

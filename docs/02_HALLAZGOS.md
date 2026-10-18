@@ -86,3 +86,15 @@ Conclusión: tal como está el prerregistro v2, la prueba de H1 solo detectaría
 - Modelo global vs. constante (walk-forward): A +0,003 [−0,010, +0,017]; B −0,007 [−0,019, +0,003]; C −0,002 [−0,014, +0,010] (con la logística en numpy: −0,0019; con scikit-learn: −0,0018). **El modelo global sigue sin mejorar a la tasa base.**
 - Potencia con señal plantada en datos sintéticos: efecto de ≈1 desviación típica detectado (+0,034 [+0,012, +0,055], 8/8 trimestres); efecto de ≈0,5 no detectado; ruido puro sin falsos positivos.
 - Lectura: si los flujos regionales tienen un efecto útil, el diseño v3 puede verlo; si el efecto es pequeño, no.
+
+## H-05 · H2 (divergencia contado/derivados, prerregistro 07): sin evidencia, y con un defecto de definición
+*Fecha: 2026-10-18 · Script: `src/modelo_h2.py` · Resultados: `results/evaluacion_h2_exploracion.txt`*
+
+- 462 eventos con las tres variables (57 excluidos, sobre todo enero–mayo de 2022); **60 divergentes** (7 en 2022, 30 en 2023, 23 en 2024).
+- Reversión: divergentes 28,3 % vs. resto 25,6 % → diferencia +2,7 pp, IC 95 % [−9,9, +14,8]. **No significativa.**
+- Fragilidad: 10,0 % vs. 12,9 % → −2,9 pp, IC [−10,8, +5,9]. **No significativa** (signo contrario al esperado).
+- Walk-forward: añadir la divergencia no mejora al modelo global (reversión −0,0009 [−0,0032, +0,0013]; fragilidad −0,0058 [−0,0129, −0,0003], es decir, empeora).
+- Veredicto según el prerregistro: **H2 v1 no cumple el criterio en 2022–2024 → archivada sin abrir el test.**
+
+**Defecto detectado al revisar el resultado:** el ratio de compras/ventas agresoras en futuros de Binance (`taker_buy_sell`) está sesgado por encima de 1 (mediana 1,099; solo 5 de 969 días por debajo de 1). La condición 3 ("derivados a favor") exige ratio < 1 en las bajadas, así que **ninguna bajada puede ser divergente** (0 eventos). La definición solo mide subidas.
+Corregirlo (centrar el ratio frente a su mediana de 30 días) sería un cambio **posterior a ver el resultado**: si se hace, es una hipótesis nueva (H2 v2) de carácter exploratorio, y solo contaría como evidencia si se confirma en el test bloqueado.

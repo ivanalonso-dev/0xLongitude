@@ -45,6 +45,13 @@ Lo visto antes de decidir: solo la línea base global con eventos de 1σ (sin me
 | Efectos de cola de la kimchi | C | Cualquier hipótesis de colas sobre la kimchi es **exploratoria**: ya se vieron sus resultados | — |
 | Modelo de supervivencia / riesgos competitivos (tiempo hasta la barrera) | C | Registrado como H6 para después de H1 | `91_IDEAS_AMPLIACION.md` |
 
+## Auditoría 3 (externa, 18-10-2026) — Camino B
+| Punto | Categoría | Resolución | Dónde |
+|---|---|---|---|
+| Investigar contradicciones contado / derivados / liquidez como línea independiente | C | Prerregistrada como H2 (`07_PREREGISTRO_H2.md`) antes de ejecutarla; resultado: sin evidencia (H-05), archivada | `src/modelo_h2.py` |
+| Tres niveles de éxito: información nueva → señal operativa → alpha comercializable | — | Adoptado como marco; H1 y H2 solo evalúan el nivel 1 | — |
+| Adquirir trades con lado agresor y libro de órdenes | C | Ya en la lista de inviables; la agresión global de Binance ya se usa | `91_IDEAS_AMPLIACION.md` |
+
 ## Reglas para auditorías futuras
 1. Una vez existan datos de flujos, **no se admiten cambios de categoría D** en H1. Cualquier mejora pasa a ser una hipótesis nueva (C).
 2. Los análisis B se publican siempre junto al veredicto, sean favorables o no.
