@@ -39,8 +39,11 @@ def cargar() -> pd.DataFrame:
         sys.exit(f"No existe {ENTRADA}. Exporta la query 01 de Dune a esa ruta.")
     f = pd.read_csv(ENTRADA)
     f["fecha"] = f["fecha"].astype(str).str[:10]          # Dune exporta '2022-01-01 00:00:00.000 UTC'
-    f["grupo"] = f["activo"].map(GRUPOS)
-    desconocidos = f.loc[f["grupo"].isna(), "activo"].unique()
+    if "grupo" not in f.columns:                           # la query 01L ya trae el grupo agregado
+        f["grupo"] = f["activo"].map(GRUPOS)
+    if "activo" not in f.columns:
+        f["activo"] = f["grupo"]
+    desconocidos = f.loc[f["grupo"].isna(), "activo"].unique()  # noqa
     if len(desconocidos):
         print(f"aviso: activos no reconocidos e ignorados: {list(desconocidos)}")
     return f.dropna(subset=["grupo"])
@@ -82,12 +85,13 @@ def resumen(f: pd.DataFrame, s: pd.DataFrame) -> str:
     t = f.groupby("region")[cols].agg(lambda x: x.abs().sum() / 1e9).round(1)
     lin.append(t.to_string())
     lin.append("")
-    lin.append("Control: neto_interno debería ser ~0 (si no, faltan etiquetas o hay doble conteo):")
-    t = f.groupby("region")[["neto_interno"]].sum().div(1e9).round(2)
-    lin.append(t.to_string())
-    lin.append("")
+    if "neto_interno" in f.columns:
+        lin.append("Control: neto_interno debería ser ~0 (si no, faltan etiquetas o hay doble conteo):")
+        t = f.groupby("region")[["neto_interno"]].sum().div(1e9).round(2)
+        lin.append(t.to_string())
+        lin.append("")
     lin.append("Días con transferencias externas por región y grupo:")
-    f2 = f.assign(grupo=f["activo"].map(GRUPOS))
+    f2 = f
     t = f2[f2["transferencias_externo"] > 0].groupby(["region", "grupo"])["fecha"].nunique().unstack()
     lin.append(t.to_string())
     lin.append("")
