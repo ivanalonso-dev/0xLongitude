@@ -4,7 +4,7 @@
 
 0xLongitude is a pre-registered quantitative research study. It tested whether regional capital flows (US, Europe, Korea/Japan, Binance, offshore exchanges), regional price premiums and derivatives positioning can tell a sustainable BTC move from one that is about to reverse.
 
-**Short answer: no.** None of the signals tested adds information beyond a simple base rate. The study documents why, and publishes every negative result, with the code to reproduce it.
+**Short answer: no robust incremental predictive value was found** for the signals tested, at the daily horizons tested. The study documents why, and publishes every negative result, with the code to reproduce it.
 
 > Research notes in `docs/` are written in Spanish. This README summarises them in English.
 
@@ -14,14 +14,14 @@
 
 | # | Finding | Evidence |
 |---|---|---|
-| 1 | **The "Coinbase premium" is mostly the price of USDT.** Measured the usual way (Coinbase BTC-USD vs Binance BTC-USDT), it moves 99.5 % in line with USDT/USD (daily correlation 0.995; 0.968 hourly). Once Binance is converted to real dollars, the premium is a few basis points of microstructure noise. Its biggest spikes were stablecoin crises (LUNA, FTX, USDC/SVB), not US demand. | `docs/02_HALLAZGOS.md` H-01 |
+| 1 | **The "Coinbase premium" mostly tracks USDT/USD.** Measured the usual way (Coinbase BTC-USD vs Binance BTC-USDT), its daily correlation with USDT/USD is 0.995 (R² ≈ 0.99; 0.968 hourly). Once Binance is converted to real dollars, the premium is a few basis points of microstructure noise. Its biggest spikes were stablecoin crises (LUNA, FTX, USDC/SVB), not US demand. The need for this correction was also pointed out by [NYDIG (Feb 2026)](https://www.nydig.com/research/correct-coinbase-premium-implies-capital-flight); this study quantifies it for 2022–2024 and tests the corrected premium's predictive value. | `docs/02_HALLAZGOS.md` H-01 |
 | 2 | **The kimchi premium is a real regional signal, but it does not predict BTC returns.** Mean +1.89 %, peak +10.99 % (19 Mar 2024). 12 tests (level, 1-day change, 3-day change, 30-day z-score × 1–3 day horizons): none significant (min block-bootstrap p = 0.098). | H-02, H-03 |
 | 3 | **A global model does not beat the base rate.** Price, volatility, spot taker imbalance, funding, open interest and premiums: no improvement in log loss over a constant model, out of sample. | H-04 |
 | 4 | **Spot/derivatives divergence does not predict reversals.** Moves without spot support but with rising leverage: reversal 28.3 % vs 25.6 % (diff. +2.7 pp, 95 % CI −9.9 to +14.8). | H-05 |
 | 5 | **Regional on-chain flows add no information.** Net flows of stablecoins and ETH/WBTC by region (Dune, Ethereum) on top of the global model: no improvement for continuation, reversal or fragility. | H-08 |
-| 6 | **"Asia" barely exists in on-chain stablecoin flows on Ethereum.** Korean and Japanese exchanges received USD 0.44 bn of external USDT/USDC deposits on Ethereum between Nov 2021 and Dec 2024, vs USD 887 bn for US exchanges. On-chain "regional" narratives about Asia rest on very thin data. | H-08 |
+| 6 | **Asian regulated exchanges are almost invisible in labelled stablecoin flows on Ethereum.** The Korean and Japanese exchanges tracked received USD 0.44 bn of external USDT/USDC deposits on Ethereum between Nov 2021 and Dec 2024, vs USD 887 bn for US exchanges. This is a coverage limit of the lens (one chain, two stablecoins, labelled wallets), not a measure of Asian market activity. | H-08 |
 
-### Headline result (walk-forward 2023–2024, 360 out-of-sample events)
+### Headline result (walk-forward validation 2023–2024, 360 out-of-sample events)
 
 Improvement in log loss from adding the four pre-registered regional variables to the global model (positive = regional helps):
 
@@ -37,7 +37,7 @@ Robust to block sizes of 5–30 days and to using the previous day's flows. Unde
 
 ## Method
 
-The study was designed so it could fail cheaply and could not be tuned after the fact.
+The study was designed so that a negative answer would be cheap to reach and the method could not be tuned after the fact.
 
 - **Pre-registration before data.** Hypothesis, targets, variables, splits and kill criterion were fixed before any on-chain flow was downloaded (`docs/05_PREREGISTRO_H1.md`). Every later change is logged and classified (clarification / sensitivity / new hypothesis / pre-data design change) in `docs/06_AUDITORIA_METODOLOGICA_H1.md`.
   SHA-256 of the frozen pre-registration: `26315767b52423c18eefa928bb91d1e3323d872042604d066f20b5584080905e`.
