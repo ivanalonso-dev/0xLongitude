@@ -23,8 +23,8 @@ Estado de los datos de flujos on-chain a 18-10-2026: **no existe ningún dato** 
 | Abandono si lo regional no aporta sobre el modelo global | D | Adoptado tal cual | v2, §8 |
 | Tipo de cambio aplicado antes de publicarse | A | Point-in-time: cada hora usa el último tipo del BCE publicado | `src/descargar_primas.py` |
 | Falta agresión compradora/vendedora | A | `binance_spot_imbalance` (global); regional inviable sin historial | `src/descargar_primas.py` |
-| Sesiones solapadas | C | Pendiente para H3 | `91_IDEAS_AMPLIACION.md` |
-| Libro de órdenes, absorción, motor de divergencias | C | Visión a largo plazo; inviable en Fase 0 | `91_IDEAS_AMPLIACION.md` |
+| Sesiones solapadas | C | Pendiente para H3 | `91_IDEAS.md` |
+| Libro de órdenes, absorción, motor de divergencias | C | Visión a largo plazo; inviable en Fase 0 | `91_IDEAS.md` |
 
 ## Cambio de diseño propio (18-10-2026) — prerregistro v3
 | Punto | Categoría | Resolución |
@@ -43,14 +43,14 @@ Lo visto antes de decidir: solo la línea base global con eventos de 1σ (sin me
 | Prevalencias, número de eventos, distribución por año, correlaciones | B | Tabla de descriptivos antes de cualquier modelo | `src/modelo_h1.py` |
 | A y B como binarios independientes pueden dar probabilidades incoherentes | B | Análisis secundario multinomial de 3 estados; no decide el veredicto | `src/modelo_h1.py` |
 | Efectos de cola de la kimchi | C | Cualquier hipótesis de colas sobre la kimchi es **exploratoria**: ya se vieron sus resultados | — |
-| Modelo de supervivencia / riesgos competitivos (tiempo hasta la barrera) | C | Registrado como H6 para después de H1 | `91_IDEAS_AMPLIACION.md` |
+| Modelo de supervivencia / riesgos competitivos (tiempo hasta la barrera) | C | Registrado como H6 para después de H1 | `91_IDEAS.md` |
 
 ## Auditoría 3 (externa, 18-10-2026) — Camino B
 | Punto | Categoría | Resolución | Dónde |
 |---|---|---|---|
 | Investigar contradicciones contado / derivados / liquidez como línea independiente | C | Prerregistrada como H2 (`07_PREREGISTRO_H2.md`) antes de ejecutarla; resultado: sin evidencia (H-05), archivada | `src/modelo_h2.py` |
 | Tres niveles de éxito: información nueva → señal operativa → alpha comercializable | — | Adoptado como marco; H1 y H2 solo evalúan el nivel 1 | — |
-| Adquirir trades con lado agresor y libro de órdenes | C | Ya en la lista de inviables; la agresión global de Binance ya se usa | `91_IDEAS_AMPLIACION.md` |
+| Adquirir trades con lado agresor y libro de órdenes | C | Ya en la lista de inviables; la agresión global de Binance ya se usa | `91_IDEAS.md` |
 
 ## Verificación de nombres en Dune (query 00a, 21-10-2026) — ANTES de ver ningún flujo
 | Punto | Categoría | Resolución |

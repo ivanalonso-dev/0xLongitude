@@ -17,10 +17,15 @@ Con esos dos resultados ajusto los nombres y la estructura para que la 01 (la ca
 - Stablecoins en Tron (gran parte del USDT asiático) también fuera de momento; se valorará igual.
 
 ## Pendiente: staking de ETH
-Las salidas de ETH de un exchange pueden ser staking del propio exchange (contrato de depósito, cbETH, wBETH), no clientes retirando. Antes de dar por buenos los netos de ETH de la 01 hay que separar esos flujos. Ver `docs/91_IDEAS_AMPLIACION.md`.
+Las salidas de ETH de un exchange pueden ser staking del propio exchange (contrato de depósito, cbETH, wBETH), no clientes retirando. Antes de dar por buenos los netos de ETH de la 01 hay que separar esos flujos. Ver `docs/91_IDEAS.md`.
 
 ## Estado (21-10-2026)
 - 00a ✅ (query 8985850) y 00b ✅ (query 8985902) ejecutadas y descargadas con `src/descargar_dune.py`.
 - 01 y 01b actualizadas con nombres verificados, Binance US, Coinbase Prime y detección de direcciones de depósito.
 - **Coste:** 01 y 01b recorren `cex.flows` desde 2022; son las más pesadas. Si con el plan gratuito fallan por tiempo o créditos, se dividen por año.
 - Descarga: `python src/descargar_dune.py <ID> data/raw/dune/<archivo>.csv` (o sin argumentos, modo preguntas).
+
+## Plan de ahorro de créditos (21-10-2026)
+1. **Ahora:** `01L_flujos_h1_desarrollo.sql` → un solo recorrido, solo 2021-11 a 2024-12, 2 grupos de activos. Suficiente para el walk-forward de H1. Salida estimada ~14.000 filas (~1 MB).
+2. **Cuando se recarguen los créditos:** sensibilidad con direcciones de depósito (`neto_externo_limpio`) y datos del periodo de test 2025-2026.
+3. **Solo si H1 aporta algo:** 01b (matriz entre regiones) y 02 (cobertura mensual).

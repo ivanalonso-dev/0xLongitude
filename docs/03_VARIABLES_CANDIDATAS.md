@@ -12,6 +12,7 @@ Regla: **descargar sí, mezclar no.** Se adelanta la descarga mientras esperamos
 | Apalancamiento | Open interest, ratio largos/cortos, compras/ventas agresoras | data.binance.vision | H2 | 🟡 script listo |
 | Pólvora seca | Oferta y emisión diaria de USDT y USDC | DefiLlama | H1 (contexto) | 🟡 script listo |
 | Sesiones | Retorno de BTC en horario Asia / Europa / EE. UU. | precios horarios ya descargados | H3 | 🟢 sin descarga, se calcula |
+| Staking ETH | Depósitos/retiradas de staking, cola de salida, LSTs a exchanges | Dune (tablas de staking) | H1 (limpieza) + H5 | ⚪ apuntado, ver `91_IDEAS.md` |
 | Institucional EE. UU. | Flujos diarios de ETF spot BTC/ETH | sin API gratuita limpia | H4 | ⚪ pendiente de fuente |
 
 ## Por qué estas y no otras

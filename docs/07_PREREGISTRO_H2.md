@@ -2,7 +2,7 @@
 
 **Fecha de congelación:** 2026-10-18, ANTES de ejecutar ningún análisis de H2.
 **Independiente de H1:** H1 sigue congelada (`05_PREREGISTRO_H1.md` v3). H2 no modifica nada de H1.
-**Origen:** auditoría externa 3 (Camino B) y `91_IDEAS_AMPLIACION.md` (H2 contado vs. apalancamiento).
+**Origen:** auditoría externa 3 (Camino B) y `91_IDEAS.md` (H2 contado vs. apalancamiento).
 
 **Lo que ya se ha visto con estas variables (se declara):** en la línea base global de H1 v3, las variables globales en forma lineal y por separado no mejoran a la tasa base (H-04). H2 prueba algo distinto: una **combinación concreta** (contradicción), definida aquí antes de mirarla.
 
