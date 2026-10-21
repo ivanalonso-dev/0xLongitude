@@ -52,6 +52,21 @@ Lo visto antes de decidir: solo la línea base global con eventos de 1σ (sin me
 | Tres niveles de éxito: información nueva → señal operativa → alpha comercializable | — | Adoptado como marco; H1 y H2 solo evalúan el nivel 1 | — |
 | Adquirir trades con lado agresor y libro de órdenes | C | Ya en la lista de inviables; la agresión global de Binance ya se usa | `91_IDEAS_AMPLIACION.md` |
 
+## Verificación de nombres en Dune (query 00a, 21-10-2026) — ANTES de ver ningún flujo
+| Punto | Categoría | Resolución |
+|---|---|---|
+| Nombres de exchanges en `cex.addresses` | A | Todos los de la Fase 0 existen con el nombre esperado (en minúsculas coinciden con la query 01) |
+| Dune separa **Binance US** de Binance | A | Binance US → cubo US (usuarios de EE. UU. con USD), según la regla de `01_ENTIDADES.md` |
+| Dune separa **Coinbase Prime** (custodia institucional, incluye ETF) | A | Cubo propio `US_PRIME`, **fuera** de las variables US de H1; reservado para H4. Ya estaba previsto separar la custodia en `01_ENTIDADES.md` |
+| Cobertura en Bitcoin y Tron | A | Bitcoin: Coinbase 13 direcciones, Upbit 1, Bithumb y bitFlyer 0. Tron: ningún exchange de US, EU ni Corea/Japón. Se confirma **solo Ethereum** en H1 |
+
+## Verificación de estructura de `cex.flows` (query 00b, 21-10-2026) — ANTES de ver ningún flujo
+| Punto | Categoría | Resolución |
+|---|---|---|
+| `flow_type` tiene 4 valores: Inflow, Outflow, Internal, Cross-CEX | A | El filtro Inflow/Outflow ya excluye la operativa interna (Internal). Cross-CEX es marginal (~0,3 mil M$ en 7 días frente a ~22 mil M$ de entradas) y queda fuera |
+| Los traspasos entre exchanges pasan por **direcciones de depósito sin etiquetar** y aparecen como Outflow de A + Inflow de B, ambos "externos" | B | La variable principal de H1 **no cambia** (`neto_externo`, prerregistrada). Se añade la sensibilidad obligatoria `neto_externo_limpio`: sin las salidas a direcciones de depósito probables de otros exchanges (heurística: direcciones que envían a un único exchange, ≥ 3 veces desde 2022). Se ejecuta con `--flujos-limpios` y se publica junto al veredicto |
+| Símbolos | A | ETH aparece como `ETH`; WBTC existe pero con poco volumen (~50 M$/semana); USDT y USDC dominan |
+
 ## Reglas para auditorías futuras
 1. Una vez existan datos de flujos, **no se admiten cambios de categoría D** en H1. Cualquier mejora pasa a ser una hipótesis nueva (C).
 2. Los análisis B se publican siempre junto al veredicto, sean favorables o no.

@@ -98,3 +98,20 @@ Conclusión: tal como está el prerregistro v2, la prueba de H1 solo detectaría
 
 **Defecto detectado al revisar el resultado:** el ratio de compras/ventas agresoras en futuros de Binance (`taker_buy_sell`) está sesgado por encima de 1 (mediana 1,099; solo 5 de 969 días por debajo de 1). La condición 3 ("derivados a favor") exige ratio < 1 en las bajadas, así que **ninguna bajada puede ser divergente** (0 eventos). La definición solo mide subidas.
 Corregirlo (centrar el ratio frente a su mediana de 30 días) sería un cambio **posterior a ver el resultado**: si se hace, es una hipótesis nueva (H2 v2) de carácter exploratorio, y solo contaría como evidencia si se confirma en el test bloqueado.
+
+## H-06 · Cobertura de etiquetas de exchanges en Dune (query 00a)
+*Fecha: 2026-10-21 · Datos: `data/raw/dune/00a_nombres_cex.csv` (650 filas: 27 exchanges × hasta 39 cadenas)*
+
+- **Ethereum:** están todos los exchanges de la Fase 0. Direcciones etiquetadas: Bithumb 494, Coinbase 241, Kraken 231, HTX 219, OKX 217, Coinbase Prime 175, Binance 136, Bitstamp 60, KuCoin 58, Bybit 45, Bitvavo 37, Bitfinex 36, Bitget 35, Upbit 24, Gemini 19, Bitpanda 17, Robinhood 14, Binance US 11, bitFlyer 8, Coincheck 5.
+- **Bitcoin:** cobertura pobre para US y Asia (Coinbase 13, Upbit 1, Bithumb 0, bitFlyer 0) → BTC nativo fuera de H1.
+- **Tron:** solo exchanges offshore y Binance → no ayuda a medir Asia regulada.
+- Número de direcciones ≠ cobertura de volumen: los exchanges grandes usan pocas hot wallets. La cobertura real se medirá con la query 02 (volumen mensual por exchange).
+- Japón (bitFlyer 8, Coincheck 5) es el punto más débil de ASIA; si la query 02 muestra volumen marginal, ASIA será en la práctica Corea.
+
+## H-07 · Estructura de los flujos de exchanges en Dune (query 00b, últimos 7 días)
+*Fecha: 2026-10-21 · Datos: `data/raw/dune/00b_estructura_flows.csv`*
+
+- Tipos de flujo: Inflow 22,4 mil M$, Outflow 22,4 mil M$, Internal 14,6 mil M$, Cross-CEX 0,3 mil M$ (7 días, Ethereum).
+- **Las entradas y salidas brutas casi se igualan**: el neto es una diferencia pequeña entre dos cifras enormes, lo que hace la señal sensible a errores de etiquetado.
+- **Cross-CEX es casi nulo**: los traspasos entre exchanges no se ven como tales; pasan por direcciones de depósito sin etiquetar. Por eso se añade la sensibilidad `neto_externo_limpio`.
+- Stablecoins dominan: USDT ~9,3 mil M$ y USDC ~6,9 mil M$ por lado; ETH ~4,6 mil M$; WBTC ~0,05 mil M$.

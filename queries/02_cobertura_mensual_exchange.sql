@@ -5,7 +5,8 @@
 
 WITH regiones (cex, region) AS (
     VALUES
-        ('coinbase','US'),('kraken','US'),('gemini','US'),('robinhood','US'),
+        ('coinbase','US'),('kraken','US'),('gemini','US'),('robinhood','US'),('binance us','US'),
+        ('coinbase prime','US_PRIME'),
         ('bitstamp','EU'),('bitvavo','EU'),('bitpanda','EU'),
         ('upbit','ASIA'),('bithumb','ASIA'),('bitflyer','ASIA'),('coincheck','ASIA'),
         ('binance','BINANCE'),

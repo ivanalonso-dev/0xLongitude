@@ -18,3 +18,9 @@ Con esos dos resultados ajusto los nombres y la estructura para que la 01 (la ca
 
 ## Pendiente: staking de ETH
 Las salidas de ETH de un exchange pueden ser staking del propio exchange (contrato de depósito, cbETH, wBETH), no clientes retirando. Antes de dar por buenos los netos de ETH de la 01 hay que separar esos flujos. Ver `docs/91_IDEAS_AMPLIACION.md`.
+
+## Estado (21-10-2026)
+- 00a ✅ (query 8985850) y 00b ✅ (query 8985902) ejecutadas y descargadas con `src/descargar_dune.py`.
+- 01 y 01b actualizadas con nombres verificados, Binance US, Coinbase Prime y detección de direcciones de depósito.
+- **Coste:** 01 y 01b recorren `cex.flows` desde 2022; son las más pesadas. Si con el plan gratuito fallan por tiempo o créditos, se dividen por año.
+- Descarga: `python src/descargar_dune.py <ID> data/raw/dune/<archivo>.csv` (o sin argumentos, modo preguntas).

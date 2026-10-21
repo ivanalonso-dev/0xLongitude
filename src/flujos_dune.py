@@ -25,6 +25,7 @@ import pandas as pd
 RAIZ = Path(__file__).resolve().parent.parent
 ENTRADA = RAIZ / "data" / "raw" / "dune" / "01_flujos_diarios_region.csv"
 SALIDA = RAIZ / "data" / "processed" / "flujos_regionales_diarios.csv"
+SALIDA_LIMPIO = RAIZ / "data" / "processed" / "flujos_regionales_diarios_limpio.csv"   # sensibilidad
 RESUMEN = RAIZ / "results" / "flujos_dune_resumen.txt"
 
 REGIONES = ["US", "EU", "ASIA", "BINANCE", "OFFSHORE"]
@@ -45,9 +46,9 @@ def cargar() -> pd.DataFrame:
     return f.dropna(subset=["grupo"])
 
 
-def construir(f: pd.DataFrame) -> pd.DataFrame:
+def construir(f: pd.DataFrame, col_neto: str = "neto_externo") -> pd.DataFrame:
     agg = f.groupby(["fecha", "region", "grupo"]).agg(
-        neto=("neto_externo", "sum"),
+        neto=(col_neto, "sum"),
         bruto=("entrada_externo", "sum"),
         salida=("salida_externo", "sum"),
     ).reset_index()
@@ -76,7 +77,8 @@ def resumen(f: pd.DataFrame, s: pd.DataFrame) -> str:
     lin.append(f"Días: {f['fecha'].nunique()} ({f['fecha'].min()} -> {f['fecha'].max()})")
     lin.append("")
     lin.append("Peso de cada tipo de contraparte sobre el flujo bruto (|neto| sumado, miles de millones USD):")
-    cols = ["neto_externo", "neto_otro_exchange", "neto_interno", "neto_staking", "neto_total"]
+    cols = [c for c in ["neto_externo", "neto_externo_limpio", "neto_salida_a_otro_cex", "neto_otro_exchange",
+                        "neto_interno", "neto_staking", "neto_total"] if c in f.columns]
     t = f.groupby("region")[cols].agg(lambda x: x.abs().sum() / 1e9).round(1)
     lin.append(t.to_string())
     lin.append("")
@@ -99,6 +101,10 @@ def main() -> None:
     s = construir(f)
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     s.to_csv(SALIDA, index=False)
+    if "neto_externo_limpio" in f.columns:
+        # sensibilidad prerregistrada: sin salidas a direcciones de depósito de otros exchanges
+        construir(f, "neto_externo_limpio").to_csv(SALIDA_LIMPIO, index=False)
+        print(f"Sensibilidad guardada en {SALIDA_LIMPIO}")
     txt = resumen(f, s)
     RESUMEN.parent.mkdir(parents=True, exist_ok=True)
     RESUMEN.write_text(txt, encoding="utf-8")

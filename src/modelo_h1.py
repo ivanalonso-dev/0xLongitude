@@ -14,6 +14,7 @@ Uso:
   python src/modelo_h1.py                    walk-forward 2023-2024
   python src/modelo_h1.py --exploratorio     usa las 20 variables regionales (solo exploración)
   python src/modelo_h1.py --retardo-flujos 1 sensibilidad: flujos del día anterior (disponibilidad)
+  python src/modelo_h1.py --flujos-limpios   sensibilidad: sin salidas a depósitos de otros exchanges
   python src/modelo_h1.py --abrir-test       único intento sobre el test (con la señal congelada)
 Requisitos: pandas, numpy
 """
@@ -51,7 +52,7 @@ EPS = 1e-6
 # --------------------------------------------------------------------------
 # Variables
 # --------------------------------------------------------------------------
-def construir_variables(exploratorio: bool, retardo: int = 0) -> tuple[pd.DataFrame, list[str], list[str]]:
+def construir_variables(exploratorio: bool, retardo: int = 0, limpio: bool = False) -> tuple[pd.DataFrame, list[str], list[str]]:
     ev = pd.read_csv(PROC / "eventos_etiquetados.csv")
     btc = pd.read_csv(PROC / "btc_diario_usd.csv")
     pr = pd.read_csv(PROC / "primas_diarias.csv")
@@ -78,7 +79,7 @@ def construir_variables(exploratorio: bool, retardo: int = 0) -> tuple[pd.DataFr
     globales = [c for c in d.columns if c.startswith("g_")]
 
     regionales: list[str] = []
-    ruta_reg = PROC / "flujos_regionales_diarios.csv"
+    ruta_reg = PROC / ("flujos_regionales_diarios_limpio.csv" if limpio else "flujos_regionales_diarios.csv")
     if ruta_reg.exists():
         reg = pd.read_csv(ruta_reg)
         if retardo:
@@ -294,19 +295,24 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--abrir-test", action="store_true")
     ap.add_argument("--exploratorio", action="store_true")
+    ap.add_argument("--flujos-limpios", action="store_true",
+                    help="sensibilidad: neto externo sin salidas a depósitos de otros exchanges")
     ap.add_argument("--retardo-flujos", type=int, default=0,
                     help="sensibilidad: usar los flujos regionales de t - N días")
     args = ap.parse_args()
     if args.abrir_test and args.exploratorio:
         sys.exit("El test solo se abre con las variables prerregistradas (sin --exploratorio).")
 
-    d, globales, regionales = construir_variables(args.exploratorio, args.retardo_flujos)
+    if args.abrir_test and args.flujos_limpios:
+        sys.exit("El test se abre solo con la definición prerregistrada (sin --flujos-limpios).")
+    d, globales, regionales = construir_variables(args.exploratorio, args.retardo_flujos, args.flujos_limpios)
     rng = np.random.default_rng(SEMILLA)
     dev = d[d["fecha"] < FIN_DESARROLLO]
 
     lin = ["0xLongitude - Evaluación H1 (prerregistro v3)"
            + ("  [EXPLORATORIO: 20 variables regionales]" if args.exploratorio else "")
-           + (f"  [SENSIBILIDAD: flujos con {args.retardo_flujos} día(s) de retardo]" if args.retardo_flujos else ""), ""]
+           + (f"  [SENSIBILIDAD: flujos con {args.retardo_flujos} día(s) de retardo]" if args.retardo_flujos else "")
+           + ("  [SENSIBILIDAD: neto externo limpio]" if args.flujos_limpios else ""), ""]
     lin.append(f"Eventos 2022-2024: {len(dev)}")
     lin.append(f"Variables globales ({len(globales)}): {', '.join(globales)}")
     lin.append(f"Variables regionales ({len(regionales)}): {', '.join(regionales) if regionales else 'NINGUNA (faltan datos de Dune)'}")
@@ -324,6 +330,7 @@ def main() -> None:
     nombre = ("evaluacion_h1_test.txt" if args.abrir_test else
               "evaluacion_h1_exploratorio.txt" if args.exploratorio else
               f"evaluacion_h1_walkforward_retardo{args.retardo_flujos}.txt" if args.retardo_flujos else
+              "evaluacion_h1_walkforward_limpio.txt" if args.flujos_limpios else
               "evaluacion_h1_walkforward.txt")
     (RES / nombre).write_text(txt, encoding="utf-8")
     print(txt)
