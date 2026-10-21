@@ -115,3 +115,28 @@ Corregirlo (centrar el ratio frente a su mediana de 30 días) sería un cambio *
 - **Las entradas y salidas brutas casi se igualan**: el neto es una diferencia pequeña entre dos cifras enormes, lo que hace la señal sensible a errores de etiquetado.
 - **Cross-CEX es casi nulo**: los traspasos entre exchanges no se ven como tales; pasan por direcciones de depósito sin etiquetar. Por eso se añade la sensibilidad `neto_externo_limpio`.
 - Stablecoins dominan: USDT ~9,3 mil M$ y USDC ~6,9 mil M$ por lado; ETH ~4,6 mil M$; WBTC ~0,05 mil M$.
+
+## H-08 · VEREDICTO DE H1 EN DESARROLLO: los flujos regionales no aportan información
+*Fecha: 2026-10-21 · Query Dune 8985957 (01L, 2021-11 a 2024-12) · Scripts: `src/flujos_dune.py`, `src/modelo_h1.py` · Resultados: `results/evaluacion_h1_walkforward*.txt`*
+
+**Calidad de datos (antes del modelo):**
+- 11.003 filas, 1.157 días, 5 regiones × 2 grupos (+ US_PRIME).
+- **ASIA stablecoins casi no existe en Ethereum:** solo 590 días con datos y 0,44 mil M$ de entradas en 3 años (frente a 887 mil M$ en US). Los exchanges coreanos y japoneses apenas mueven USDT/USDC por Ethereum. La variable prerregistrada `asia_stables_z` es casi ruido (120 de 519 eventos sin dato).
+- Colas muy pesadas en los z-scores (hasta −62 en ASIA riesgo).
+- El staking separado funciona: US riesgo −10,2 mil M$ hacia staking (Coinbase), fuera del neto externo.
+
+**Walk-forward 2023–2024 (360 eventos), modelo global + 4 variables regionales prerregistradas vs. global:**
+
+| Objetivo | Mejora de log loss | IC 95 % | Trimestres que mejoran |
+|---|---|---|---|
+| A · continuación | −0,0024 | [−0,0110, +0,0061] | 3/8 |
+| B · reversión | −0,0001 | [−0,0054, +0,0049] | 3/8 |
+| C · fragilidad | −0,0042 | [−0,0200, +0,0067] | 5/8 |
+
+- Sensibilidad con flujos del día anterior (disponibilidad): A −0,0067, B +0,0017, C +0,0021; ninguna significativa.
+- Exploratorio con las 20 variables: peor en los tres objetivos (C −0,028, IC por debajo de 0).
+- Robusto a tamaños de bloque de 5 a 30 días.
+
+**Veredicto según el prerregistro v3 (§5):** el éxito exige mejora media positiva en el walk-forward **y** IC > 0 en el test bloqueado. La mejora media es negativa en los tres objetivos, así que **H1 no puede cumplirse: se archiva sin descargar ni abrir el test 2025–2026** (también ahorra créditos de Dune).
+**Aplicación de la condición de abandono (§8):** la atribución regional deja de ser el núcleo predictivo de 0xLongitude y queda como capa descriptiva (mapa, contenido, globo).
+**Pendiente opcional, no cambia el veredicto:** sensibilidad `neto_externo_limpio` (direcciones de depósito), solo si sobran créditos.

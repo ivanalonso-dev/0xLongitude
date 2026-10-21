@@ -43,7 +43,7 @@ Swing traders de BTC/ETH, mesas pequeñas y fondos cripto que operan a 1–3 dí
 ```
 
 ## Hoja de ruta
-- **Fase 0 — Validación:** primas + flujos on-chain + backtest. *(en curso)*
+- **Fase 0 — Validación:** primas + flujos on-chain + backtest. **Cerrada el 21-10-2026: H1 no aporta información (H-08); H2 archivada (H-05).** La atribución regional queda como capa descriptiva.
 - **Fase 1 — Señal en vivo:** cálculo diario automático e historial público sin retocar.
 - **Fase 2 — Globo (capa visual):** solo si la Fase 0 pasa. Ver `docs/90_IDEA_GLOBO.md`.
 - Ideas aparcadas: `docs/91_IDEAS_AMPLIACION.md`.

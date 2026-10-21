@@ -1,0 +1,43 @@
+0xLongitude - flujos de Dune (SOLO entrenamiento 2022-2024)
+
+Días: 1157 (2021-11-01 -> 2024-12-31)
+
+Peso de cada tipo de contraparte sobre el flujo bruto (|neto| sumado, miles de millones USD):
+          neto_externo  neto_otro_exchange  neto_staking  neto_total
+region                                                              
+ASIA               4.4                 0.2           0.0         4.4
+BINANCE          237.8                16.4           5.1       238.2
+EU                17.2                 0.0           0.5        17.5
+OFFSHORE         133.6                 6.1           1.9       184.1
+US               114.6                 3.8          10.1       113.9
+
+Días con transferencias externas por región y grupo:
+grupo     riesgo  stables
+region                   
+ASIA        1157      590
+BINANCE     1157     1157
+EU          1157     1157
+OFFSHORE    1157     1157
+US          1157     1157
+
+Variables generadas (no nulas en entrenamiento):
+us_riesgo_norm           1127
+us_riesgo_z              1097
+us_stables_norm          1127
+us_stables_z             1097
+eu_riesgo_norm           1127
+eu_riesgo_z              1097
+eu_stables_norm          1127
+eu_stables_z             1097
+asia_riesgo_norm         1127
+asia_riesgo_z            1097
+asia_stables_norm        1020
+asia_stables_z            808
+binance_riesgo_norm      1127
+binance_riesgo_z         1097
+binance_stables_norm     1127
+binance_stables_z        1097
+offshore_riesgo_norm     1127
+offshore_riesgo_z        1097
+offshore_stables_norm    1127
+offshore_stables_z       1097

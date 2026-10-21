@@ -2,7 +2,7 @@
 
 Eventos 2022-2024: 519
 Variables globales (10): g_r_en_sigmas, g_sigma, g_rango_en_sigmas, g_mom3_al, g_spot_imbalance_al, g_coinbase_premium_al, g_kimchi_d1_al, g_funding_al, g_oi_cambio_al, g_taker_fut_al
-Variables regionales (0): NINGUNA (faltan datos de Dune)
+Variables regionales (4): r_us_stables_z_al, r_asia_stables_z_al, r_us_riesgo_z_al, r_asia_riesgo_z_al
 
 ##### DESCRIPTIVOS (antes de cualquier modelo) #####
       eventos      A      B  neutro      C
@@ -12,27 +12,47 @@ anio
 2024      192  0.302  0.286   0.411  0.135
 Eventos con otro evento en los 3 días anteriores (ventanas de 72 h solapadas): 86.5%
 Eventos por mes: mediana 15, máximo 21 (2022-04)
+Correlaciones entre variables regionales (alineadas):
+                     r_us_stables_z_al  r_asia_stables_z_al  r_us_riesgo_z_al  r_asia_riesgo_z_al
+r_us_stables_z_al                 1.00                -0.00              0.07               -0.03
+r_asia_stables_z_al              -0.00                 1.00             -0.05               -0.06
+r_us_riesgo_z_al                  0.07                -0.05              1.00                0.10
+r_asia_riesgo_z_al               -0.03                -0.06              0.10                1.00
+Faltantes por variable regional: r_us_stables_z_al=0, r_asia_stables_z_al=120, r_us_riesgo_z_al=0, r_asia_riesgo_z_al=0
 
 ##### WALK-FORWARD 2023-T1 -> 2024-T4 (8 pliegues trimestrales) #####
 
 === A · continuación | 360 eventos fuera de muestra | tasa real 0.294 ===
   constante        log_loss 0.6111  brier 0.2097
   global           log_loss 0.6079  brier 0.2082  auc 0.527
+  global+regional  log_loss 0.6103  brier 0.2093  auc 0.533
   mejora global vs constante:  +0.0033  IC95 [-0.0104, +0.0172]
-  C elegidos por pliegue: global: [0.03, 0.01, 0.01, 0.01, 0.01, 0.1, 0.01, 0.01]
+  mejora regional vs global:   -0.0024  IC95 [-0.0110, +0.0061]  -> no demostrado
+  sensibilidad IC95 por tamaño de bloque (regional vs global): 5d [-0.0107, +0.0055] | 10d [-0.0114, +0.0062] | 20d [-0.0124, +0.0065] | 30d [-0.0106, +0.0058]
+  C elegidos por pliegue: global: [0.03, 0.01, 0.01, 0.01, 0.01, 0.1, 0.01, 0.01] | global+regional: [0.01, 0.01, 0.01, 0.01, 0.03, 0.1, 0.01, 0.01]
+  trimestres en que lo regional mejora: 3/8
 
 === B · reversión | 360 eventos fuera de muestra | tasa real 0.267 ===
   constante        log_loss 0.5806  brier 0.1958
   global           log_loss 0.5880  brier 0.1991  auc 0.499
-  mejora global vs constante:  -0.0074  IC95 [-0.0185, +0.0026]
-  C elegidos por pliegue: global: [0.01, 0.01, 0.03, 0.01, 0.01, 0.01, 0.01, 0.03]
+  global+regional  log_loss 0.5882  brier 0.1993  auc 0.506
+  mejora global vs constante:  -0.0074  IC95 [-0.0196, +0.0024]
+  mejora regional vs global:   -0.0001  IC95 [-0.0054, +0.0049]  -> no demostrado
+  sensibilidad IC95 por tamaño de bloque (regional vs global): 5d [-0.0055, +0.0049] | 10d [-0.0056, +0.0053] | 20d [-0.0057, +0.0054] | 30d [-0.0050, +0.0047]
+  C elegidos por pliegue: global: [0.01, 0.01, 0.03, 0.01, 0.01, 0.01, 0.01, 0.03] | global+regional: [0.01, 0.01, 0.03, 0.01, 0.01, 0.01, 0.01, 0.01]
+  trimestres en que lo regional mejora: 3/8
 
 === C · fragilidad | 360 eventos fuera de muestra | tasa real 0.131 ===
   constante        log_loss 0.3885  brier 0.1137
   global           log_loss 0.3904  brier 0.1146  auc 0.570
-  mejora global vs constante:  -0.0019  IC95 [-0.0141, +0.0096]
-  C elegidos por pliegue: global: [0.1, 0.01, 0.03, 0.01, 0.01, 0.1, 0.3, 0.03]
+  global+regional  log_loss 0.3946  brier 0.1166  auc 0.582
+  mejora global vs constante:  -0.0019  IC95 [-0.0146, +0.0101]
+  mejora regional vs global:   -0.0042  IC95 [-0.0200, +0.0067]  -> no demostrado
+  sensibilidad IC95 por tamaño de bloque (regional vs global): 5d [-0.0207, +0.0069] | 10d [-0.0198, +0.0067] | 20d [-0.0196, +0.0059] | 30d [-0.0178, +0.0046]
+  C elegidos por pliegue: global: [0.1, 0.01, 0.03, 0.01, 0.01, 0.1, 0.3, 0.03] | global+regional: [0.1, 0.01, 0.01, 0.01, 0.01, 0.01, 0.3, 0.03]
+  trimestres en que lo regional mejora: 5/8
 
 ##### SECUNDARIO: modelo multinomial de 3 estados (C fijo = 0,1; no decide el veredicto) #####
   constante        log_loss multiclase 1.0802
   global           log_loss multiclase 1.1129
+  global+regional  log_loss multiclase 1.1321
