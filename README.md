@@ -118,4 +118,4 @@ Not investment advice and not a trading signal. A negative result, documented so
 
 ---
 
-Author: **Ivan Alonso**
+Author: **Ivan Alonso** · [GitHub](https://github.com/ivanalonso-dev) · [LinkedIn](https://www.linkedin.com/in/ivanalonsodev) · [X](https://x.com/ivanalonsodev)
